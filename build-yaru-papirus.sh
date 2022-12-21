@@ -1,15 +1,15 @@
 mkdir -p ./build/
 cd build
 mkdir -p ./YaruPapirus
-mv index.theme ./YaruPapirus
+cp -vf ../index.theme ./YaruPapirus
 _yp="./YaruPapirus/"
 _papirusLocation="/usr/share/icons/Papirus/"
 _yaruLocation="/usr/share/icons/Yaru/"
 #mkdir -p ../YaruPapirus/128x128
 _sub="128x128"
 mkdir -p "$_yp$_sub"
-ln -s "$_yaruLocation$_sub"/* $_yp$_sub 
-#mkdir -p ../YaruPapirus/16x16   
+ln -s "$_yaruLocation$_sub"/* $_yp$_sub
+#mkdir -p ../YaruPapirus/16x16
 _sub="16x16"
 mkdir -p "$_yp$_sub"
 ln -s "$_yaruLocation$_sub"/* $_yp$_sub
@@ -22,7 +22,7 @@ ln -s "$_yaruLocation$_sub"/* $_yp$_sub
 rm $_yp$_sub/apps
 ln -s "$_papirusLocation$_sub"/apps $_yp$_sub
 #mkdir -p ../YaruPapirus/22x22
-ln -s "$_yaruLocation/22x22" ../YaruPapirus/22x22
+ln -s "$_yaruLocation/22x22" ./YaruPapirus/22x22
 #mkdir -p ../YaruPapirus/24x24
 _sub="24x24"
 mkdir -p "$_yp$_sub"
