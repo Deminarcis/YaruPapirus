@@ -1,12 +1,9 @@
 _execdir="$PWD"
-sudo dnf install -y git meson ninja
+sudo dnf install -y git meson ninja-build yaru-icon-theme
 mkdir -p ./build/
 cd build
 #Get Yaru
-git clone https://github.com/ubuntu/yaru.git
-cd yaru/icons
-meson "build" --prefix=$HOME/.local
-ninja -C "build" install
+cp -rf /usr/share/icons/Yaru "$HOME/.local/share/icons/Yaru/"
 cd "$_execdir/build/"
 #Get Papirus
 wget -qO- https://git.io/papirus-icon-theme-install | DESTDIR="$HOME/.local/share/icons" sh
@@ -23,13 +20,13 @@ cp -rvf "$_yaruLocation$_sub"/* $_yp$_sub
 _sub="16x16"
 mkdir -p "$_yp$_sub"
 cp -rvf "$_yaruLocation$_sub"/* $_yp$_sub
-rm $_yp$_sub/apps
+rm -rf $_yp$_sub/apps
 cp -rvf "$_papirusLocation$_sub"/apps $_yp$_sub
 #mkdir -p ../YaruPapirus/16x16@2x
 _sub="16x16@2x"
 mkdir -p "$_yp$_sub"
 cp -rvf "$_yaruLocation$_sub"/* $_yp$_sub
-rm $_yp$_sub/apps
+rm -rf $_yp$_sub/apps
 cp -rvf "$_papirusLocation$_sub"/apps $_yp$_sub
 #mkdir -p ../YaruPapirus/22x22
 cp -rvf "$_yaruLocation/22x22" ./YaruPapirus/22x22
@@ -37,47 +34,47 @@ cp -rvf "$_yaruLocation/22x22" ./YaruPapirus/22x22
 _sub="24x24"
 mkdir -p "$_yp$_sub"
 cp -rvf "$_yaruLocation$_sub"/* $_yp$_sub
-rm $_yp$_sub/apps
+rm -rf $_yp$_sub/apps
 cp -rvf "$_papirusLocation$_sub"/apps $_yp$_sub
 #mkdir -p ../YaruPapirus/24x24@2x
 _sub="24x24@2x"
 mkdir -p "$_yp$_sub"
 cp -rvf "$_yaruLocation$_sub"/* $_yp$_sub
-rm $_yp$_sub/apps
+rm -rf $_yp$_sub/apps
 cp -rvf "$_papirusLocation$_sub"/apps $_yp$_sub
 #mkdir -p ../YaruPapirus/256x256
 _sub="256x256"
 mkdir -p "$_yp$_sub"
 cp -rvf "$_yaruLocation$_sub"/* $_yp$_sub
-rm $_yp$_sub/apps
+rm -rf $_yp$_sub/apps
 #mkdir -p ../YaruPapirus/256x256@2x
 _sub="256x256@2x"
 mkdir -p "$_yp$_sub"
 cp -rvf "$_yaruLocation$_sub"/* $_yp$_sub
-rm $_yp$_sub/apps
+rm -rf $_yp$_sub/apps
 #mkdir -p ../YaruPapirus/32x32
 _sub="32x32"
 mkdir -p "$_yp$_sub"
 cp -rvf "$_yaruLocation$_sub"/* $_yp$_sub
-rm $_yp$_sub/apps
+rm -rf $_yp$_sub/apps
 cp -rvf "$_papirusLocation$_sub"/apps $_yp$_sub
 #mkdir -p ../YaruPapirus/32x32@2x
 _sub="32x32@2x"
 mkdir -p "$_yp$_sub"
 cp -rvf "$_yaruLocation$_sub"/* $_yp$_sub
-rm $_yp$_sub/apps
+rm -rf $_yp$_sub/apps
 cp -rvf "$_papirusLocation$_sub"/apps $_yp$_sub
 #mkdir -p ../YaruPapirus/48x48
 _sub="48x48"
 mkdir -p "$_yp$_sub"
 cp -rvf "$_yaruLocation$_sub"/* $_yp$_sub
-rm $_yp$_sub/apps
+rm -rf -f $_yp$_sub/apps
 cp -rvf "$_papirusLocation$_sub"/apps $_yp$_sub
 #mkdir -p ../YaruPapirus/48x48@2x
 _sub="48x48@2x"
 mkdir -p "$_yp$_sub"
 cp -rvf "$_yaruLocation$_sub"/* $_yp$_sub
-rm $_yp$_sub/apps
+rm -rf $_yp$_sub/apps
 cp -rvf "$_papirusLocation$_sub"/apps $_yp$_sub
 #mkdir -p ../YaruPapirus/64x64
 _sub="64x64"
@@ -104,8 +101,7 @@ _sub="scalable-max-32"
 mkdir -p "$_yp$_sub"
 cp -rvf "$_yaruLocation$_sub"/* $_yp$_sub
 #cleanup
-cd $_execdir/build/yaru/icons
-ninja -C "build" uninstall
+rm -rf -r "$HOME/.local/share/icons/Yaru/"
 wget -qO- https://git.io/papirus-icon-theme-uninstall | sh
 # Install the icons
 cd "$_execdir/build/"
