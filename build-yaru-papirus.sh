@@ -1,10 +1,20 @@
+_execdir="$PWD"
+sudo dnf install -y git meson ninja
 mkdir -p ./build/
 cd build
+#Get Yaru
+git clone https://github.com/ubuntu/yaru.git
+cd yaru/icons
+meson "build" --prefix=$HOME/.local
+ninja -C "build" install
+cd "$_execdir/build/"
+#Get Papirus
+wget -qO- https://git.io/papirus-icon-theme-install | DESTDIR="$HOME/.local/share/icons" sh
 mkdir -p ./YaruPapirus
 cp -rvf ../index.theme ./YaruPapirus
 _yp="./YaruPapirus/"
-_papirusLocation="/usr/share/icons/Papirus/"
-_yaruLocation="/usr/share/icons/Yaru/"
+_papirusLocation="$HOME/.local/share/icons/Papirus/"
+_yaruLocation="$HOME/.local/share/icons/Yaru/"
 #mkdir -p ../YaruPapirus/128x128
 _sub="128x128"
 mkdir -p "$_yp$_sub"
@@ -93,4 +103,10 @@ cp -rvf "$_yaruLocation$_sub"/* $_yp$_sub
 _sub="scalable-max-32"
 mkdir -p "$_yp$_sub"
 cp -rvf "$_yaruLocation$_sub"/* $_yp$_sub
-
+#cleanup
+cd $_execdir/build/yaru/icons
+ninja -C "build" uninstall
+wget -qO- https://git.io/papirus-icon-theme-uninstall | sh
+# Install the icons
+cd "$_execdir/build/"
+sudo cp -rvf YaruPapirus /usr/share/icons
